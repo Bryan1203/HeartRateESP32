@@ -5,8 +5,15 @@
 /* Local name which should pop up when scanning for BLE devices. */
 #define BLE_LOCAL_NAME                "ESP32 HR monitor"
 
+#define MIN_HR 45
+#define MAX_HR 210
+#define FAN_PWM_PIN 13
+
+int duty_cycle;
+
 BLEService HeartRateService("180D");
 BLECharacteristic HeartRateMeasurement("2A37", BLENotify, 6);
+
 
 void setup() {
   Serial.begin(115200);
@@ -29,7 +36,8 @@ void setup() {
   Serial.println("Center established");
   BLE.scanForUuid("180D");
 
-  
+  pinMode(FAN_PWM_PIN, OUTPUT);
+
 }
 
 
@@ -45,7 +53,7 @@ void loop() {
                 Serial.print("' ");
                 Serial.print(peripheral.advertisedServiceUuid());
                 Serial.println();
-                if (peripheral.localName() == "HRM-Dual:084939") { //name of simulated Polar HR device
+                if (peripheral.localName() == "HRM-Dual:084939") { //name of BLE HRM device
                   BLE.stopScan();
                   if (peripheral.connect())
                     Serial.print("Connected to Garmin HRM ");
@@ -80,6 +88,13 @@ void loop() {
                     uint8_t value[6];
                     characteristic.readValue(value,6);
                     Serial.println(value[1]);
+                    //change the fan speed to the corresponding HR value
+                    //map the HR to 0 - 100 that corresponding to the duty cycle (PWN) fan speed
+                    Serial.println("duty cycle: ");
+                    duty_cycle = (int)(((double)(value[1]-MIN_HR)/(MAX_HR-MIN_HR))*255);
+                   
+                    Serial.println(duty_cycle);
+                    analogWrite(FAN_PWM_PIN, duty_cycle);
                     if(BLE.central())
                     {     
                       /* 
@@ -90,8 +105,14 @@ void loop() {
                       characteristic.readValue(value,6);
                       Serial.println("value updated (device connected)");
                       Serial.println(value[1]);
-                      HeartRateMeasurement.writeValue(value, 6);
-                      Serial.println("value sent to device");
+                      
+//                      HeartRateMeasurement.writeValue(value, 6);
+//                      Serial.println("value sent to device");
+                      //change the fan speed to the corresponding HR value
+                      //map the HR to 0 - 100 that corresponding to the duty cycle (PWN) fan speed
+                      Serial.println("duty cycle: ");
+                      Serial.println((value[1]-MIN_HR)/(MAX_HR-MIN_HR));
+                      
                     }
                   }
                   //Serial.println();
