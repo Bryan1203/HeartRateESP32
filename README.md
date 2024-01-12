@@ -13,6 +13,7 @@ The intension was to mimic somthing like Wahoo KICKR HEADWIND, this device also 
 # Hardware and equiments
 1x ESP32 dev board  
 1x 120mm 12V Fan with ARGB  
+1x Bluetooth Heart Rate Band or Smart Watch that could broadcast HR data through Bluetooth
 1x 3 position toggle switch  
 2x Panel Mount buttons  
 1x 12V DC source  
