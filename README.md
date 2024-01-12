@@ -20,4 +20,5 @@ The intension was to mimic somthing like Wahoo KICKR HEADWIND, this device also 
 1x DC panel mount female plug  
 some wires  
 
+# Schematic
 ![HRFAN_schamatic (1)](https://github.com/Bryan1203/HeartRateESP32/assets/12186042/f4938646-2c22-44fb-8327-9fb46cf81d0e)
