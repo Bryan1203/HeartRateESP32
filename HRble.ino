@@ -1,6 +1,31 @@
 #include <ArduinoBLE.h>
+#include <FastLED.h>
 #include <algorithm>
 #include <iostream>
+
+/* led define */
+FASTLED_USING_NAMESPACE
+
+#if defined(FASTLED_VERSION) && (FASTLED_VERSION < 3001000)
+#warning "Requires FastLED 3.1 or later; check github for latest code."
+#endif
+
+#define DATA_PIN    12
+//#define CLK_PIN   4
+#define LED_TYPE    WS2811
+#define COLOR_ORDER GRB
+#define NUM_LEDS    16
+CRGB leds[NUM_LEDS];
+
+#define BRIGHTNESS          100
+#define FRAMES_PER_SECOND  120
+CRGB colorStart = CRGB::Green;
+CRGB colorEnd = CRGB::Red;
+float stepR = (colorEnd.r - colorStart.r) / float(255);
+float stepG = (colorEnd.g - colorStart.g) / float(255);
+float stepB = (colorEnd.b - colorStart.b) / float(255);
+/* led define end*/
+
 /* Device name which can be scene in BLE scanning software. */
 #define BLE_DEVICE_NAME               "ESP32 BLE Sense"
 /* Local name which should pop up when scanning for BLE devices. */
@@ -129,6 +154,12 @@ void setup() {
   attachInterrupt(MINUS_PIN, minusISR, FALLING);
   attachInterrupt(AUTO, autoISR, FALLING);
   attachInterrupt(MANUAL, manualISR, FALLING);
+
+  // tell FastLED about the LED strip configuration
+  FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+
+  // set master brightness control
+  FastLED.setBrightness(BRIGHTNESS);
 }
 
 
@@ -191,6 +222,8 @@ void loop() {
                     
                     Serial.println(duty_cycle);
                     analogWrite(FAN_PWM_PIN, duty_cycle);
+                    fill_solid(leds,NUM_LEDS, CRGB(colorStart.r + int(stepR * duty_cycle), colorStart.g + int(stepG * duty_cycle), colorStart.b + int(stepB * duty_cycle)));
+                    FastLED.show();
                     if(BLE.central())
                     {     
                       /* 
@@ -206,11 +239,13 @@ void loop() {
 //                      Serial.println("value sent to device");
                       //change the fan speed to the corresponding HR value
                       //map the HR to 0 - 100 that corresponding to the duty cycle (PWN) fan speed
-                     Serial.print("Fan PWM 0-255: ");
+                      Serial.print("Fan PWM 0-255: ");
                       duty_cycle = min((int)(((double)(value[1]-MIN_HR)/(MAX_HR-MIN_HR))*255)+offset,255);
                       
                       Serial.println(duty_cycle);
                       analogWrite(FAN_PWM_PIN, duty_cycle);
+                      fill_solid(leds,NUM_LEDS, CRGB(colorStart.r + int(stepR * duty_cycle), colorStart.g + int(stepG * duty_cycle), colorStart.b + int(stepB * duty_cycle)));
+                      FastLED.show();
                         
                     }
                   }
@@ -237,12 +272,16 @@ void loop() {
             duty_cycle = offset;
             Serial.println(duty_cycle);
             analogWrite(FAN_PWM_PIN, duty_cycle);
+            fill_solid(leds,NUM_LEDS, CRGB(colorStart.r + int(stepR * duty_cycle), colorStart.g + int(stepG * duty_cycle), colorStart.b + int(stepB * duty_cycle)));
+            FastLED.show();
             
             } 
             /* neutral mode */
             else if (digitalRead(AUTO)&&digitalRead(MANUAL)){
               Serial.println("Neutral Mode:");
               analogWrite(FAN_PWM_PIN, 0);
+              fill_solid(leds,NUM_LEDS,CRGB::Black);
+              FastLED.show();
               delay(1000);
             }            
 }
