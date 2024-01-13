@@ -2,7 +2,7 @@
 # Introduction
 This project recieves Bluetooth signals from heart rate monitor then displayed it on serial ports and adjust the fan speed through PWN. 
 
-The buttons adjust the offset (fan speed) and the toggle switch between manual auto and neutral modes.
+The buttons adjust the offset (fan speed) and the toggle switch swtiches between manual, auto, and neutral modes.
 
 Manual mode set the fan speed by the offset value.
 Auto set the fan speed through Heart Rate plus offset. 
