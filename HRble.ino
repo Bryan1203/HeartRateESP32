@@ -16,7 +16,7 @@
 #define MANUAL 25
 
 /* define global variables */
-int duty_cycle;
+volatile uint8_t duty_cycle;
 volatile int offset = 170;
 //determine if using HR to control the fan; default to false
 //volatile bool automatic = !digitalRead(AUTO);
@@ -35,7 +35,7 @@ void IRAM_ATTR plusISR(){
   if (button_time - last_button_time > 250)
   {
   
-    if (offset > 255){
+    if (offset+10 > 255){
       offset = 255;
       } else{
         offset += 10;
@@ -44,13 +44,12 @@ void IRAM_ATTR plusISR(){
     last_button_time = button_time;
 
   }
-  
 }
 void IRAM_ATTR minusISR(){
   button_time = millis();
   if (button_time - last_button_time > 250)
   {
-    if (offset < 0){
+    if (offset-10 < 0){
       offset = 0;
       } else{
         offset -= 10;
@@ -61,44 +60,43 @@ void IRAM_ATTR minusISR(){
   }
   
 }
-//void IRAM_ATTR autoISR(){
-//  button_time = millis();
-//  if (button_time - last_button_time > 250)
-//  {
-//    Serial.println("Entered Auto Mode");
+void IRAM_ATTR autoISR(){
+  button_time = millis();
+  if (button_time - last_button_time > 250)
+  {
+    Serial.println("Entered Auto Mode");
 //    analogWrite(FAN_PWM_PIN, 0);
 //    automatic = true; 
 //    neutral = false;
-//    last_button_time = button_time;
-//
-//  }
-//}
-//
-//void IRAM_ATTR manualISR(){button_time = millis();
-//   button_time = millis();
-//  if (button_time - last_button_time > 250)
-//  {
-//    Serial.println("Entered Manual Mode");
+    last_button_time = button_time;
+
+  }
+}
+
+void IRAM_ATTR manualISR(){button_time = millis();
+   button_time = millis();
+  if (button_time - last_button_time > 250)
+  {
+    Serial.println("Entered Manual Mode");
 //    peripheral.disconnect();
 //    automatic = false;
 //    neutral = false;
-//    last_button_time = button_time;
-//
-//  }
-//}
-//void IRAM_ATTR neutralISR(){
-//  button_time = millis();
-//  button_time = millis();
-//  if (button_time - last_button_time > 250)
-//  {
-//    Serial.println("Entered Neutral Mode");
+    last_button_time = button_time;
+
+  }
+}
+void IRAM_ATTR neutralISR(){
+  button_time = millis();
+  if (button_time - last_button_time > 250)
+  {
+    Serial.println("Entered Neutral Mode");
 //    peripheral.disconnect();
 //    automatic = false;
 //    neutral = true;
-//    last_button_time = button_time;
-//
-//  }
-//}
+    last_button_time = button_time;
+
+  }
+}
 
 void setup() {
   Serial.begin(115200);
@@ -129,13 +127,8 @@ void setup() {
 
   attachInterrupt(PLUS_PIN, plusISR, CHANGE);
   attachInterrupt(MINUS_PIN, minusISR, FALLING);
-//  attachInterrupt(AUTO, autoISR, FALLING);
-//  attachInterrupt(MANUAL, manualISR, FALLING);
-  
-//  attachInterrupt(AUTO, neutralISR, RISING);
-//  attachInterrupt(MANUAL, neutralISR, RISING);
-  
-
+  attachInterrupt(AUTO, autoISR, FALLING);
+  attachInterrupt(MANUAL, manualISR, FALLING);
 }
 
 
@@ -145,7 +138,7 @@ void loop() {
   BLEDevice central = BLE.central();
   
   if (!digitalRead(AUTO)&&!(digitalRead(AUTO)&&digitalRead(MANUAL))) {
-    Serial.println("Auto");
+    //Serial.println("Auto Heart Rate Mode: ");
     analogWrite(FAN_PWM_PIN, 0);
     if (peripheral){
                 
@@ -193,7 +186,7 @@ void loop() {
                     Serial.println(value[1]);
                     //change the fan speed to the corresponding HR value
                     //map the HR to 0 - 100 that corresponding to the duty cycle (PWN) fan speed
-                    Serial.println("duty cycle: ");
+                    Serial.print("Fan PWM 0-255: ");
                     duty_cycle = min((int)(((double)(value[1]-MIN_HR)/(MAX_HR-MIN_HR))*255)+offset,255);
                     
                     Serial.println(duty_cycle);
@@ -213,9 +206,12 @@ void loop() {
 //                      Serial.println("value sent to device");
                       //change the fan speed to the corresponding HR value
                       //map the HR to 0 - 100 that corresponding to the duty cycle (PWN) fan speed
-                      Serial.println("duty cycle: ");
-                      Serial.println((value[1]-MIN_HR)/(MAX_HR-MIN_HR));
+                     Serial.print("Fan PWM 0-255: ");
+                      duty_cycle = min((int)(((double)(value[1]-MIN_HR)/(MAX_HR-MIN_HR))*255)+offset,255);
                       
+                      Serial.println(duty_cycle);
+                      analogWrite(FAN_PWM_PIN, duty_cycle);
+                        
                     }
                   }
                   //Serial.println();
@@ -233,23 +229,22 @@ void loop() {
                 setup();
                 //BLE.scanForUuid("180D");
                 }
-                
+           /* manual mode */     
           }else if (!digitalRead(MANUAL)&&!(digitalRead(AUTO)&&digitalRead(MANUAL))){
-            Serial.println("Manual");
-
+            //Serial.println("Manual Mode:");
+            delay(1000);
+            Serial.print("Fan PWM 0-255: ");
             duty_cycle = offset;
-            sleep(1);
             Serial.println(duty_cycle);
             analogWrite(FAN_PWM_PIN, duty_cycle);
             
             } 
+            /* neutral mode */
             else if (digitalRead(AUTO)&&digitalRead(MANUAL)){
-              Serial.println("Neutral");
+              Serial.println("Neutral Mode:");
               analogWrite(FAN_PWM_PIN, 0);
-              sleep(1);
-            }
-              //Serial.println("after if ");
-            
+              delay(1000);
+            }            
 }
 
 
