@@ -26,16 +26,16 @@ some wires
 # Building it up!!!
 It's time to build it up! Follow the schematic shown above, then test it if it works. Then, for the casing I search up something related to this project and I found [this](https://www.instructables.com/Neo-Desktop-Fan/?fbclid=IwAR02mM12bzN0vI-XH6ynZ7b5XTv7ZkDJrPBm9M5zgRpZU5WP5N7Cm5cuvWM). But since I am using a larger version of esp32, I had to redesign the bottom container and add four more holes for the buttons, switch, and the DC barrel. Here are the printed parts.
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/26e9dead-a86d-44f6-8ae9-a059a2fb35b0" width="200">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/26e9dead-a86d-44f6-8ae9-a059a2fb35b0">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/bbc56e2e-46ee-4520-aa68-a9be02265d58" width="355">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/bbc56e2e-46ee-4520-aa68-a9be02265d58">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/9935da17-5fe4-4181-bd22-1174d5838864" width="355">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/9935da17-5fe4-4181-bd22-1174d5838864">
 
 Then install the ESP32, buttons, switch, and the barrel plug to the container. Finally, screw the screws and close the container. 
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/d4cac89a-4931-4bf3-8f6e-e45c951d0df7" width="585">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/d4cac89a-4931-4bf3-8f6e-e45c951d0df7">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/3757f798-38b6-43c4-a1dc-723aa2297d30" width="330">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/3757f798-38b6-43c4-a1dc-723aa2297d30">
 
 
