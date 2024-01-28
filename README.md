@@ -24,4 +24,4 @@ some wires
 ![HRFAN_schamatic (1)](https://github.com/Bryan1203/HeartRateESP32/assets/12186042/f4938646-2c22-44fb-8327-9fb46cf81d0e)
 
 # Building it up!!!
-It's time to build it up! I search up something related to this project and I found [this]((https://www.instructables.com/Neo-Desktop-Fan/?fbclid=IwAR02mM12bzN0vI-XH6ynZ7b5XTv7ZkDJrPBm9M5zgRpZU5WP5N7Cm5cuvWM)). But since I am using a larger version of esp32, I had to redesign the bottom container and add four more holes for the buttons, switch, and the DC barrel. 
+It's time to build it up! I search up something related to this project and I found this(https://www.instructables.com/Neo-Desktop-Fan/?fbclid=IwAR02mM12bzN0vI-XH6ynZ7b5XTv7ZkDJrPBm9M5zgRpZU5WP5N7Cm5cuvWM). But since I am using a larger version of esp32, I had to redesign the bottom container and add four more holes for the buttons, switch, and the DC barrel. 
