@@ -26,7 +26,7 @@ some wires
 # Building it up!!!
 It's time to build it up! I search up something related to this project and I found [this](https://www.instructables.com/Neo-Desktop-Fan/?fbclid=IwAR02mM12bzN0vI-XH6ynZ7b5XTv7ZkDJrPBm9M5zgRpZU5WP5N7Cm5cuvWM). But since I am using a larger version of esp32, I had to redesign the bottom container and add four more holes for the buttons, switch, and the DC barrel. Here are the printed parts.
 
-<img src="[https://your-image-url.type](https://github.com/Bryan1203/HeartRateESP32/assets/12186042/26e9dead-a86d-44f6-8ae9-a059a2fb35b0)" width="200">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/26e9dead-a86d-44f6-8ae9-a059a2fb35b0" width="200">
 ![416002921_1410318119856520_1009621977185622306_n](https://github.com/Bryan1203/HeartRateESP32/assets/12186042/bbc56e2e-46ee-4520-aa68-a9be02265d58 | width=200)
 
 ![415727588_3519300121666392_2343474290733118752_n](https://github.com/Bryan1203/HeartRateESP32/assets/12186042/9935da17-5fe4-4181-bd22-1174d5838864 | width=200)
