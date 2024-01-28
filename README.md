@@ -28,7 +28,7 @@ It's time to build it up! I search up something related to this project and I fo
 
 <img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/26e9dead-a86d-44f6-8ae9-a059a2fb35b0" width="200">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/bbc56e2e-46ee-4520-aa68-a9be02265d58" width="350">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/bbc56e2e-46ee-4520-aa68-a9be02265d58" width="360">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/9935da17-5fe4-4181-bd22-1174d5838864" width="350">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/9935da17-5fe4-4181-bd22-1174d5838864" width="360">
 
