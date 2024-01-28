@@ -34,8 +34,8 @@ It's time to build it up! Follow the schematic shown above, then test it if it w
 
 Then install the ESP32, buttons, switch, and the barrel plug to the container. Finally, screw the screws and close the container. 
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/d4cac89a-4931-4bf3-8f6e-e45c951d0df7" width="580">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/d4cac89a-4931-4bf3-8f6e-e45c951d0df7" width="585">
 
-<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/2d45a377-4d2f-4092-a0d9-2702bc3a06c3" width="330">
+<img src="https://github.com/Bryan1203/HeartRateESP32/assets/12186042/3757f798-38b6-43c4-a1dc-723aa2297d30" width="330">
 
 
