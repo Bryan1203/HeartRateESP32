@@ -1,6 +1,6 @@
 # ESP32 Bluetooth Heartrate Fan Speed Controller
 # Introduction
-This project recieves Bluetooth signals from heart rate monitor then displayed it on serial ports and adjust the fan speed through PWN. 
+This project recieves Bluetooth signals from heart rate monitor then displayed it on serial ports and adjust the fan speed through PWM. 
 
 The buttons adjust the offset (fan speed) and the toggle switch swtiches between manual, auto, and neutral modes.
 
